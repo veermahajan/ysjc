@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { withBase } from '../util/url';
 ---
 
 <Layout title="Contact" current="" description="Get in touch with the YSJC team. Email ysjcteam@gmail.com — we typically respond within 48 hours.">
@@ -22,13 +23,13 @@ import Layout from '../layouts/Layout.astro';
       <div class="contact-card">
         <p class="eyebrow">Parent meeting</p>
         <p class="big-text">Weekend of June 13–14, 2026</p>
-        <p class="muted">The Zoom link is sent to registered families before the meeting. <a href="/register">Sign up for updates</a> if you'd like to receive it.</p>
+        <p class="muted">The Zoom link is sent to registered families before the meeting. <a href={withBase('/register')}>Sign up for updates</a> if you'd like to receive it.</p>
       </div>
 
       <div class="contact-card">
         <p class="eyebrow">Common questions</p>
         <p>Most parent questions are answered on the program page:</p>
-        <p><a class="btn btn-ghost btn-arrow" href="/program#faq">Read the FAQ</a></p>
+        <p><a class="btn btn-ghost btn-arrow" href={withBase('/program#faq')}>Read the FAQ</a></p>
       </div>
 
       <div class="contact-card">

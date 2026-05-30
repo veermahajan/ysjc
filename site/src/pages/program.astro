@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { withBase } from '../util/url';
 
 const weeks = [
   {
@@ -239,13 +240,13 @@ const faqs = [
       <h2>The full program packet</h2>
       <p class="lead">Everything on this page in one document, plus the academic expectations and conduct rules signed by participants.</p>
       <div class="download-row">
-        <a class="card download-card" href="/pdfs/ysjc-2026-program-outline.pdf">
+        <a class="card download-card" href={withBase('/pdfs/ysjc-2026-program-outline.pdf')}>
           <p class="eyebrow">PDF · 4 pages</p>
           <h3>2026 Program Outline</h3>
           <p>The full information packet for parents and students.</p>
           <span class="link-row">Download <span aria-hidden="true">↓</span></span>
         </a>
-        <a class="card download-card" href="/pdfs/ysjc-2026-academic-expectations.pdf">
+        <a class="card download-card" href={withBase('/pdfs/ysjc-2026-academic-expectations.pdf')}>
           <p class="eyebrow">PDF · 1 page</p>
           <h3>Academic Expectations</h3>
           <p>Class rules and online conduct, distilled into one page.</p>
@@ -255,8 +256,8 @@ const faqs = [
 
       <details class="pdf-embed-wrap">
         <summary>Preview the Program Outline inline</summary>
-        <object data="/pdfs/ysjc-2026-program-outline.pdf#view=FitH" type="application/pdf" class="pdf-embed">
-          <p>Your browser cannot display the PDF inline. <a href="/pdfs/ysjc-2026-program-outline.pdf">Download it instead</a>.</p>
+        <object data={withBase('/pdfs/ysjc-2026-program-outline.pdf#view=FitH')} type="application/pdf" class="pdf-embed">
+          <p>Your browser cannot display the PDF inline. <a href={withBase('/pdfs/ysjc-2026-program-outline.pdf')}>Download it instead</a>.</p>
         </object>
       </details>
     </div>

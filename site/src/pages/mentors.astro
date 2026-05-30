@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { subjects } from '../data/subjects';
+import { withBase } from '../util/url';
 
 const mentors2025 = subjects
   .filter((s) => s.mentor2025)
@@ -43,7 +44,7 @@ const mentors2025 = subjects
               <h3>{m.name}</h3>
               <p class="bio-placeholder muted">Bio coming soon.</p>
               {m.subject.papers2025.length > 0 && (
-                <a class="link-row" href={`/journal/${m.subject.key}`}>
+                <a class="link-row" href={withBase(`/journal/${m.subject.key}`)}>
                   See {m.subject.shortName} archive <span aria-hidden="true">→</span>
                 </a>
               )}

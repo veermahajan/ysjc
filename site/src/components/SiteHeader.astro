@@ -1,21 +1,22 @@
 ---
 import { Image } from 'astro:assets';
 import wordmark from '../assets/logo/wordmark.png';
+import { withBase } from '../util/url';
 
 const { current } = Astro.props as { current?: string };
 
 const nav = [
-  { href: '/program',  label: 'Program'  },
-  { href: '/subjects', label: 'Subjects' },
-  { href: '/mentors',  label: 'Mentors'  },
-  { href: '/journal',  label: 'Journal'  },
-  { href: '/register', label: 'Register' },
+  { key: 'program',  href: withBase('/program'),  label: 'Program'  },
+  { key: 'subjects', href: withBase('/subjects'), label: 'Subjects' },
+  { key: 'mentors',  href: withBase('/mentors'),  label: 'Mentors'  },
+  { key: 'journal',  href: withBase('/journal'),  label: 'Journal'  },
+  { key: 'register', href: withBase('/register'), label: 'Register' },
 ];
 ---
 
 <header class="site-header">
   <div class="container header-row">
-    <a href="/" class="brand" aria-label="Youth STEM Journal Club — home">
+    <a href={withBase('/')} class="brand" aria-label="Youth STEM Journal Club — home">
       <Image src={wordmark} alt="Youth STEM Journal Club" widths={[200, 400]} sizes="200px" />
     </a>
 
@@ -25,7 +26,7 @@ const nav = [
           <li>
             <a
               href={item.href}
-              class:list={['nav-link', current === item.href.replace('/', '') ? 'is-current' : '']}
+              class:list={['nav-link', current === item.key ? 'is-current' : '']}
             >{item.label}</a>
           </li>
         ))}

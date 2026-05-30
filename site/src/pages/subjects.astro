@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { subjects } from '../data/subjects';
+import { withBase } from '../util/url';
 ---
 
 <Layout title="Subjects" current="subjects" description="The STEM subject cohorts offered by YSJC for Summer 2026. Each cohort is mentor-led and built around real research papers.">
@@ -45,7 +46,7 @@ import { subjects } from '../data/subjects';
             )}
 
             {s.mentor2025 && (
-              <a class="archive-link" href={`/journal/${s.key}`}>
+              <a class="archive-link" href={withBase(`/journal/${s.key}`)}>
                 See the 2025 archive <span aria-hidden="true">→</span>
               </a>
             )}

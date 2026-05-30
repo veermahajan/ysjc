@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import { subjects } from '../../data/subjects';
 import { journalV1 } from '../../data/journal-v1';
+import { withBase } from '../../util/url';
 import groupPhoto from '../../assets/photos/group-2025.jpg';
 
 const cohorts = subjects
@@ -22,7 +23,7 @@ const cohorts = subjects
       <p class="hero-sub">Summer 2025</p>
       <p class="lead">We are honored to present the first volume of the YSJC Journal, compiled with the literature reviews written by students in our six subject groups on various scientific papers. Over the course of the Summer 2025 term, the students engaged in guided discussions, learned how to dissect and interpret research, and completed a capstone project, consisting of a literature review paper and a final presentation. This journal showcases their curiosity, critical thinking, and commitment to understanding complex scientific topics, serving as a celebration of their hard work.</p>
       <p class="downloads-row">
-        <a class="btn btn-primary btn-arrow" href="/pdfs/ysjc-volume-1-summer-2025.pdf">Download the full PDF</a>
+        <a class="btn btn-primary btn-arrow" href={withBase('/pdfs/ysjc-volume-1-summer-2025.pdf')}>Download the full PDF</a>
       </p>
     </div>
   </header>
@@ -39,7 +40,7 @@ const cohorts = subjects
       <div class="cohort-grid">
         {cohorts.map(({ subject, entry }) => (
           <a
-            href={`/journal/${subject.key}`}
+            href={withBase(`/journal/${subject.key}`)}
             class="cohort-card"
             style={`--card-color: ${subject.color}; --card-tint: color-mix(in srgb, ${subject.color} 10%, white);`}
           >
@@ -66,7 +67,7 @@ const cohorts = subjects
     <div class="container narrow center">
       <p class="eyebrow">Volume 2 — Summer 2026</p>
       <h2>Coming after this summer's program.</h2>
-      <p class="lead">Volume 2 will include literature reviews from the 2026 cohort. <a href="/register">Sign up to be notified</a> when it's published.</p>
+      <p class="lead">Volume 2 will include literature reviews from the 2026 cohort. <a href={withBase('/register')}>Sign up to be notified</a> when it's published.</p>
     </div>
   </section>
 
@@ -74,8 +75,8 @@ const cohorts = subjects
     <div class="container">
       <h2>Read the full Volume 1</h2>
       <p class="lead">Embedded below — or download the PDF.</p>
-      <object data="/pdfs/ysjc-volume-1-summer-2025.pdf#view=FitH" type="application/pdf" class="pdf-embed">
-        <p>Your browser cannot display the PDF inline. <a href="/pdfs/ysjc-volume-1-summer-2025.pdf">Download it instead</a>.</p>
+      <object data={withBase('/pdfs/ysjc-volume-1-summer-2025.pdf#view=FitH')} type="application/pdf" class="pdf-embed">
+        <p>Your browser cannot display the PDF inline. <a href={withBase('/pdfs/ysjc-volume-1-summer-2025.pdf')}>Download it instead</a>.</p>
       </object>
     </div>
   </section>

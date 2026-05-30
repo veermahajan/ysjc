@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { withBase } from '../util/url';
 ---
 
 <Layout title="Register" current="register" description="Sign up to be notified when YSJC Summer 2026 registration opens. Drop your email and we'll send the registration form and parent meeting Zoom link.">
@@ -36,8 +37,8 @@ import Layout from '../layouts/Layout.astro';
       </dl>
 
       <p class="more-info">
-        Want the full program packet? <a href="/program">Read the program page</a> or
-        <a href="/pdfs/ysjc-2026-program-outline.pdf">download the 2026 outline (PDF)</a>.
+        Want the full program packet? <a href={withBase('/program')}>Read the program page</a> or
+        <a href={withBase('/pdfs/ysjc-2026-program-outline.pdf')}>download the 2026 outline (PDF)</a>.
       </p>
     </div>
   </section>

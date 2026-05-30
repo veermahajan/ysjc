@@ -4,6 +4,7 @@ import type { ImageMetadata } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import { subjects, subjectsByKey, type SubjectKey } from '../../data/subjects';
 import { journalV1 } from '../../data/journal-v1';
+import { withBase } from '../../util/url';
 
 import bioCohort from '../../assets/photos/biology-cohort.jpg';
 import chemCohort from '../../assets/photos/chemistry-cohort.jpg';
@@ -72,9 +73,9 @@ const cohortPaperList = entry.reviews
           {entry.reviews.map((r) => <li><em>{r.paperTitle}</em></li>)}
         </ul>
         <hr />
-        <a class="aside-link" href="/pdfs/ysjc-volume-1-summer-2025.pdf">Full Vol. 1 PDF ↓</a>
+        <a class="aside-link" href={withBase('/pdfs/ysjc-volume-1-summer-2025.pdf')}>Full Vol. 1 PDF ↓</a>
         {meta.mentor2025 && (
-          <a class="aside-link" href="/mentors">All mentors →</a>
+          <a class="aside-link" href={withBase('/mentors')}>All mentors →</a>
         )}
       </aside>
 
@@ -93,8 +94,8 @@ const cohortPaperList = entry.reviews
         <hr />
         <p class="small muted">Originally published in <em>YSJC Journal, Vol. 1, Summer 2025</em>.</p>
         <p>
-          <a class="btn btn-ghost btn-arrow" href="/journal">Back to the journal</a>
-          <a class="btn btn-primary btn-arrow" href="/pdfs/ysjc-volume-1-summer-2025.pdf">Download Vol. 1 PDF</a>
+          <a class="btn btn-ghost btn-arrow" href={withBase('/journal')}>Back to the journal</a>
+          <a class="btn btn-primary btn-arrow" href={withBase('/pdfs/ysjc-volume-1-summer-2025.pdf')}>Download Vol. 1 PDF</a>
         </p>
       </footer>
     </article>

@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import mark from '../assets/logo/mark.png';
+import { withBase } from '../util/url';
 ---
 
 <footer class="site-footer">
@@ -17,23 +18,23 @@ import mark from '../assets/logo/mark.png';
       <div class="footer-col">
         <h5>Site</h5>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/program">Program</a></li>
-          <li><a href="/subjects">Subjects</a></li>
-          <li><a href="/mentors">Mentors</a></li>
-          <li><a href="/journal">Journal</a></li>
-          <li><a href="/register">Register</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href={withBase('/')}>Home</a></li>
+          <li><a href={withBase('/program')}>Program</a></li>
+          <li><a href={withBase('/subjects')}>Subjects</a></li>
+          <li><a href={withBase('/mentors')}>Mentors</a></li>
+          <li><a href={withBase('/journal')}>Journal</a></li>
+          <li><a href={withBase('/register')}>Register</a></li>
+          <li><a href={withBase('/contact')}>Contact</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h5>Summer 2025</h5>
         <ul>
-          <li><a href="/journal">Journal Vol. 1</a></li>
-          <li><a href="/pdfs/ysjc-volume-1-summer-2025.pdf">Download Vol. 1 (PDF)</a></li>
-          <li><a href="/pdfs/ysjc-2026-program-outline.pdf">2026 Program Outline (PDF)</a></li>
-          <li><a href="/pdfs/ysjc-2026-academic-expectations.pdf">2026 Academic Expectations (PDF)</a></li>
+          <li><a href={withBase('/journal')}>Journal Vol. 1</a></li>
+          <li><a href={withBase('/pdfs/ysjc-volume-1-summer-2025.pdf')}>Download Vol. 1 (PDF)</a></li>
+          <li><a href={withBase('/pdfs/ysjc-2026-program-outline.pdf')}>2026 Program Outline (PDF)</a></li>
+          <li><a href={withBase('/pdfs/ysjc-2026-academic-expectations.pdf')}>2026 Academic Expectations (PDF)</a></li>
         </ul>
       </div>
     </div>
