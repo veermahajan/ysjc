@@ -2,13 +2,10 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
-// Deploys at https://veermahajan.github.io/ysjc/
-// When the project moves to a custom domain, set CUSTOM_DOMAIN=1 in env
-// so the base path goes back to "/".
-const usingCustomDomain = process.env.CUSTOM_DOMAIN === '1';
-
+// Deployed on Vercel — site lives at the root of its assigned domain.
+// `base` is "/" (Astro default); the `withBase()` helper still works and
+// becomes a no-op. If we ever deploy to a subpath again, set `base` here.
 export default defineConfig({
-  site: usingCustomDomain ? 'https://ysjc.org' : 'https://veermahajan.github.io',
-  base: usingCustomDomain ? '/' : '/ysjc',
+  site: 'https://ysjc.vercel.app',
   integrations: [mdx()],
 });
