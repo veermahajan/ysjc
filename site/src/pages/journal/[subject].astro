@@ -1,0 +1,194 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import { subjects, subjectsByKey, type SubjectKey } from '../../data/subjects';
+import { journalV1 } from '../../data/journal-v1';
+
+import bioCohort from '../../assets/photos/biology-cohort.jpg';
+import chemCohort from '../../assets/photos/chemistry-cohort.jpg';
+import csCohort from '../../assets/photos/cs-cohort.jpg';
+import psychCohort from '../../assets/photos/psychology-cohort.jpg';
+
+const cohortPhotos: Partial<Record<SubjectKey, ImageMetadata>> = {
+  biology: bioCohort,
+  chemistry: chemCohort,
+  cs: csCohort,
+  psychology: psychCohort,
+};
+
+export async function getStaticPaths() {
+  return subjects
+    .filter((s) => journalV1[s.key] !== null)
+    .map((s) => ({
+      params: { subject: s.key },
+    }));
+}
+
+const { subject } = Astro.params as { subject: SubjectKey };
+const meta = subjectsByKey[subject];
+const entry = journalV1[subject]!;
+const photo = cohortPhotos[subject] ?? null;
+
+const cohortPaperList = entry.reviews
+  .map((r) => r.paperTitle)
+  .join(' · ');
+---
+
+<Layout
+  title={`${meta.name} — Journal Vol. 1`}
+  current="journal"
+  description={`The ${meta.name} cohort's literature review${entry.reviews.length > 1 ? 's' : ''} from YSJC Summer 2025: ${cohortPaperList}.`}
+>
+
+  <header class="archive-hero" style={`--subj-color: ${meta.color}; --subj-tint: color-mix(in srgb, ${meta.color} 14%, white);`}>
+    <div class="container">
+      <p class="eyebrow">YSJC Journal · Volume 1 · Summer 2025</p>
+      <h1 class="subj-name">{meta.name}</h1>
+      <p class="hero-mentor">Mentor: <strong>{meta.mentor2025}</strong></p>
+      <p class="lead">{meta.description}</p>
+    </div>
+  </header>
+
+  {photo && (
+    <section class="banner">
+      <Image
+        src={photo}
+        alt={`The ${meta.name} cohort presenting on Showcase Day, July 26, 2025.`}
+        widths={[800, 1200, 1600]}
+        sizes="100vw"
+      />
+    </section>
+  )}
+
+  <div class="article-wrap">
+    <article class="article container narrow">
+      <aside class="meta-card" aria-label="Cohort metadata">
+        <p class="meta-label">2025 scholars</p>
+        <p class="scholars">{meta.scholars2025.join(' · ')}</p>
+        <hr />
+        <p class="meta-label">Source paper{entry.reviews.length > 1 ? 's' : ''}</p>
+        <ul class="paper-list">
+          {entry.reviews.map((r) => <li><em>{r.paperTitle}</em></li>)}
+        </ul>
+        <hr />
+        <a class="aside-link" href="/pdfs/ysjc-volume-1-summer-2025.pdf">Full Vol. 1 PDF ↓</a>
+        {meta.mentor2025 && (
+          <a class="aside-link" href="/mentors">All mentors →</a>
+        )}
+      </aside>
+
+      {entry.reviews.map((review, idx) => (
+        <section class="review" aria-labelledby={`review-${idx}`}>
+          {entry.reviews.length > 1 && (
+            <p class="review-eyebrow">Literature Review {idx + 1} of {entry.reviews.length}</p>
+          )}
+          <h2 id={`review-${idx}`}>{review.paperTitle}</h2>
+          <p class="byline">By {review.authors}</p>
+          {review.paragraphs.map((p) => <p>{p}</p>)}
+        </section>
+      ))}
+
+      <footer class="article-foot">
+        <hr />
+        <p class="small muted">Originally published in <em>YSJC Journal, Vol. 1, Summer 2025</em>.</p>
+        <p>
+          <a class="btn btn-ghost btn-arrow" href="/journal">Back to the journal</a>
+          <a class="btn btn-primary btn-arrow" href="/pdfs/ysjc-volume-1-summer-2025.pdf">Download Vol. 1 PDF</a>
+        </p>
+      </footer>
+    </article>
+  </div>
+</Layout>
+
+<style>
+  .archive-hero {
+    background:
+      radial-gradient(60% 80% at 90% 30%, var(--subj-tint) 0%, transparent 70%),
+      var(--ysjc-mint);
+    padding-block: clamp(48px, 8vw, 96px) clamp(32px, 5vw, 64px);
+    border-bottom: 1px solid color-mix(in srgb, var(--subj-color) 30%, white);
+  }
+  .subj-name {
+    color: var(--subj-color);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: var(--space-1);
+  }
+  .hero-mentor { color: var(--ink-soft); font-size: var(--fs-small); margin-bottom: var(--space-2); }
+
+  .banner { overflow: hidden; max-height: 360px; }
+  .banner img { width: 100%; height: 360px; object-fit: cover; display: block; }
+
+  .article-wrap { padding-block: var(--section-y); }
+  .article.narrow { max-width: 880px; }
+
+  .meta-card {
+    background: var(--ysjc-mint);
+    border-left: 3px solid var(--subj-color, var(--ysjc-teal));
+    border-radius: var(--r-chip);
+    padding: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+  .meta-label {
+    font-size: var(--fs-tiny);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .meta-card .scholars { font-size: var(--fs-small); margin: 0 0 var(--space-1); }
+  .meta-card hr { margin: var(--space-2) 0; border-color: var(--ysjc-mint-deep); }
+  .paper-list { padding-inline-start: 1.25rem; margin: 0; }
+  .paper-list li { margin-bottom: 4px; font-size: var(--fs-small); }
+  .aside-link {
+    display: inline-block;
+    margin-right: var(--space-3);
+    margin-top: var(--space-1);
+    font-size: var(--fs-small);
+    color: var(--ysjc-blue);
+    font-weight: 600;
+  }
+
+  .review { max-width: var(--reading-max); margin-inline: auto; margin-bottom: var(--space-6); }
+  .review-eyebrow {
+    font-size: var(--fs-tiny);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ysjc-teal-deep);
+    margin-bottom: var(--space-1);
+  }
+  .review h2 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--ink);
+    margin-bottom: var(--space-1);
+    line-height: 1.25;
+  }
+  .byline {
+    color: var(--ink-soft);
+    font-size: var(--fs-small);
+    margin-bottom: var(--space-4);
+    font-style: italic;
+  }
+  .review p {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: var(--space-3);
+  }
+
+  .article-foot {
+    max-width: var(--reading-max);
+    margin-inline: auto;
+  }
+  .article-foot p:last-child {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-top: var(--space-3);
+  }
+  .small { font-size: var(--fs-small); }
+</style>

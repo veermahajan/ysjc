@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Register" current="register" description="Sign up to be notified when YSJC Summer 2026 registration opens. Drop your email and we'll send the registration form and parent meeting Zoom link.">
+
+  <header class="page-header">
+    <div class="container narrow">
+      <p class="eyebrow">Summer 2026 · Free</p>
+      <h1>Register for Summer 2026.</h1>
+      <p class="lead">Registration opens soon. Drop your email and we'll send the registration form the moment it's live, plus the parent meeting Zoom link for the weekend of June 13–14.</p>
+
+      <form class="reg-form" action="mailto:ysjcteam@gmail.com" method="post" enctype="text/plain">
+        <label class="visually-hidden" for="email">Email address</label>
+        <input id="email" type="email" name="email" required placeholder="parent@email.com" />
+        <button type="submit" class="btn btn-primary btn-arrow">Notify me</button>
+      </form>
+      <p class="small muted">We send 2-3 emails a year. No spam.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container narrow">
+      <h2>Program at a glance</h2>
+      <p class="lead">Everything you're signing up to be notified about.</p>
+
+      <dl class="glance">
+        <div><dt>Format</dt><dd>100% online (Zoom)</dd></div>
+        <div><dt>Duration</dt><dd>4 weeks beginning the week of June 15, 2026</dd></div>
+        <div><dt>Sessions</dt><dd>Two 1-hour cohort sessions per week (days/times TBD)</dd></div>
+        <div><dt>Parent meeting</dt><dd>Weekend of June 13–14, 2026</dd></div>
+        <div><dt>Final presentations</dt><dd>Saturday of Week 4</dd></div>
+        <div><dt>Audience</dt><dd>Middle and high school students</dd></div>
+        <div><dt>Cost</dt><dd>Free</dd></div>
+        <div><dt>Mentors</dt><dd>High school students, each running one subject cohort</dd></div>
+      </dl>
+
+      <p class="more-info">
+        Want the full program packet? <a href="/program">Read the program page</a> or
+        <a href="/pdfs/ysjc-2026-program-outline.pdf">download the 2026 outline (PDF)</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section mint">
+    <div class="container narrow center">
+      <h2>Questions before you sign up?</h2>
+      <p class="lead">Email <a href="mailto:ysjcteam@gmail.com">ysjcteam@gmail.com</a> — we typically respond within 48 hours.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--ysjc-mint);
+    padding-block: clamp(48px, 8vw, 96px) clamp(40px, 6vw, 80px);
+  }
+  .narrow { max-width: 720px; }
+  .center { text-align: center; }
+
+  .reg-form {
+    display: flex;
+    gap: var(--space-1);
+    margin-block: var(--space-3) var(--space-1);
+    flex-wrap: wrap;
+  }
+  .reg-form input[type=email] {
+    flex: 1 1 280px;
+    min-width: 240px;
+    padding: 14px 16px;
+    font-size: var(--fs-body);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-chip);
+    font-family: inherit;
+    background: var(--paper);
+  }
+  .reg-form input[type=email]:focus-visible {
+    outline: 2px solid var(--ysjc-blue);
+    outline-offset: 2px;
+    border-color: var(--ysjc-blue);
+  }
+  .small { font-size: var(--fs-small); }
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+  }
+
+  .glance {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2) var(--space-3);
+    margin-block: var(--space-3);
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-2);
+  }
+  @media (max-width: 640px) { .glance { grid-template-columns: 1fr; } }
+  .glance > div {
+    padding: var(--space-1) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .glance dt {
+    font-size: var(--fs-tiny);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ysjc-teal-deep);
+    margin-bottom: 2px;
+  }
+  .glance dd { margin: 0; font-weight: 500; color: var(--ink); }
+  .more-info { margin-top: var(--space-3); }
+
+  .section.mint { background: var(--ysjc-mint); }
+</style>

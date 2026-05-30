@@ -1,0 +1,418 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const weeks = [
+  {
+    title: 'Week 1 — Foundations of Reading Research',
+    days: [
+      {
+        h: 'Day 1: Introduction to research literature',
+        items: [
+          'Anatomy of a research paper: abstract, methods, results, discussion',
+          'Types of research — experimental, observational, computational, theoretical',
+          'Breakout rooms by subject cohort to meet mentors',
+        ],
+      },
+      {
+        h: 'Day 2: First paper introduced',
+        items: [
+          "Mentors introduce the cohort's first paper and its real-world context",
+          'Begin guided reading and annotation',
+          'Soft-deadline reading assignment posted to Google Classroom',
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Week 2 — Getting Started with Research',
+    days: [
+      {
+        h: 'Day 1: Results & interpretation',
+        items: [
+          'Reading figures, tables, and statistical claims',
+          'Cohort discussion: what do the results actually show?',
+          'Gimkit or Kahoot review on key terms from the week',
+        ],
+      },
+      {
+        h: 'Day 2: Methods deep-dive',
+        items: [
+          'Discussion of the experimental or analytical methods used in the paper',
+          'How researchers design a study — controls, variables, sample size',
+          'Live activity: identify the methodology in a short companion paper',
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Week 3 — Critical Thinking in Research',
+    days: [
+      {
+        h: 'Day 1: Limitations and critique',
+        items: [
+          'Identifying limitations, confounders, and unanswered questions in the paper',
+          'How peer review and replication work in practice',
+          'Students draft three critical questions to bring to the next session',
+        ],
+      },
+      {
+        h: 'Day 2: Connecting the paper to the broader field',
+        items: [
+          'Where does this paper fit in the existing literature landscape?',
+          'Discussion of related work and follow-up studies',
+          'Mentors help students choose the angle for their final presentation',
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Week 4 — Presentation & Communication',
+    days: [
+      {
+        h: 'Day 1: Final presentation preparation',
+        items: [
+          'Clinic on science communication — slide-making, pacing, plain-language framing',
+          'Mentors give live feedback on student draft slides and run practice presentations',
+          'Final logistics confirmed for Presentation Day',
+        ],
+      },
+      {
+        h: 'Day 2: Presentation Day',
+        items: [
+          'Each department head introduces their group and their works',
+          'Students present their paper analyses and insights to peers and parents',
+          'Q&A sessions after each presentation',
+          'Closing remarks and program celebration',
+        ],
+      },
+    ],
+  },
+];
+
+const conductGroups = [
+  {
+    title: 'Preparation',
+    rules: [
+      'Complete the assigned reading (about three pages per session) before each meeting.',
+      'Come with at least one question, note, or reflection to share with your cohort.',
+      'Submit any Google Classroom assignments by the posted soft deadline.',
+    ],
+  },
+  {
+    title: 'Zoom etiquette',
+    rules: [
+      'Join on time with a stable internet connection.',
+      'Cameras on for the full session — your full face should be clearly visible.',
+      'Microphones muted unless speaking or instructed otherwise.',
+      'Use a neutral, non-distracting background and avoid multitasking.',
+      'Display your real first and last name on Zoom for attendance.',
+    ],
+  },
+  {
+    title: 'Respect & participation',
+    rules: [
+      'Show respect to mentors, peers, and guests at all times.',
+      'Disagreements are welcome — disrespect is not.',
+      'Participate thoughtfully in discussions and breakout rooms.',
+    ],
+  },
+  {
+    title: 'Attendance',
+    rules: [
+      'Notify your mentor in advance if you must miss a session and complete the work independently.',
+      'Repeated unexcused absences may result in dismissal from the program.',
+    ],
+  },
+];
+
+const faqs = [
+  { q: 'Is the program free?', a: "Yes. YSJC has no participation fees. It's a free summer program run by high school student volunteers." },
+  { q: 'Who can join?', a: 'Middle and high school students. Subject placement is by interest and preference, not grade level.' },
+  { q: 'What about time zones?', a: "All sessions are live on Zoom. Days and times are set by each cohort once mentors and most participants are confirmed — we work to find times that suit the majority of registered students' time zones." },
+  { q: 'How are mentors vetted?', a: "Mentors are high school students who have taught the same paper to a cohort before or done meaningful research in the field. The program lead reviews each mentor's subject expertise and teaching plan before the program begins." },
+  { q: 'What if my child misses a session?', a: 'Notify the mentor in advance. Reading and any short activity from the missed session is posted to the cohort\'s Google Classroom — your child completes it on their own time and re-joins the next session.' },
+  { q: 'Are the papers age-appropriate?', a: 'Mentors pick papers that are challenging but accessible — landmark studies, recent research that has popular-press coverage, or supplements that walk through the math. We don\'t expect any student to understand everything; we expect them to learn how to read it.' },
+  { q: 'Will my child be photographed?', a: 'Sessions are not recorded. Presentation Day is a celebratory event and photos may be taken with parental consent.' },
+];
+---
+
+<Layout title="Program" current="program" description="How the YSJC summer program works — 4 weeks online over Zoom, with two 1-hour cohort sessions per week, structured around real research papers.">
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Summer 2026 · 100% online</p>
+      <h1>How the program works.</h1>
+      <p class="lead">Four weeks. Two 1-hour Zoom sessions per week. One mentor, one cohort, two real research papers, and a final presentation in front of peers and parents.</p>
+    </div>
+  </header>
+
+  <!-- FORMAT -->
+  <section class="section">
+    <div class="container">
+      <h2>Format at a glance</h2>
+      <dl class="glance">
+        <div><dt>Format</dt><dd>100% online (Zoom)</dd></div>
+        <div><dt>Duration</dt><dd>4 weeks beginning the week of June 15, 2026</dd></div>
+        <div><dt>Sessions</dt><dd>Two 1-hour cohort sessions per week (days/times TBD)</dd></div>
+        <div><dt>Parent meeting</dt><dd>Weekend of June 13–14, 2026</dd></div>
+        <div><dt>Final presentations</dt><dd>Saturday of Week 4</dd></div>
+        <div><dt>Cost</dt><dd>Free</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- WEEK BY WEEK -->
+  <section class="section weeks">
+    <div class="container">
+      <h2>Week by week</h2>
+      <p class="lead">Each week follows a consistent rhythm: two live Zoom sessions, asynchronous reading via Google Classroom, and interactive activities (Kahoot, Gimkit) to keep things lively.</p>
+
+      <div class="week-list">
+        {weeks.map((w) => (
+          <article class="week-block">
+            <h3>{w.title}</h3>
+            <div class="day-grid">
+              {w.days.map((d) => (
+                <div class="day">
+                  <h4>{d.h}</h4>
+                  <ul>{d.items.map((it) => <li>{it}</li>)}</ul>
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ACADEMIC EXPECTATIONS -->
+  <section class="section mint">
+    <div class="container">
+      <h2>Academic expectations</h2>
+      <p class="lead">YSJC is a discussion-based program, not a graded course. Students are expected to complete asynchronous pre-readings (about three pages per session) and short reflection notes between meetings.</p>
+      <p>The goal is to foster scientific curiosity, mentorship, and open discussion — <em>not</em> assessments or tests.</p>
+
+      <h3 class="subhead">Engagement &amp; retention</h3>
+      <ul class="bullets">
+        <li><strong>Soft deadlines</strong> on Google Classroom to give structure without high-stakes pressure.</li>
+        <li><strong>Interactive review activities</strong> (Kahoot, Gimkit) embedded into sessions.</li>
+        <li><strong>Small cohort sizes</strong> so every student has a voice in discussion.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ONLINE CONDUCT -->
+  <section class="section">
+    <div class="container">
+      <h2>Online conduct &amp; expectations</h2>
+      <p class="lead">To keep sessions productive and respectful, all participants agree to the following across every Zoom session.</p>
+      <div class="conduct-grid">
+        {conductGroups.map((g) => (
+          <div class="conduct-group">
+            <h3>{g.title}</h3>
+            <ol>{g.rules.map((r) => <li>{r}</li>)}</ol>
+          </div>
+        ))}
+      </div>
+      <p class="muted small">Repeated violations may result in dismissal from the program.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section mint" id="faq">
+    <div class="container">
+      <h2>Frequently asked</h2>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq">
+            <summary><span>{f.q}</span></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOADS -->
+  <section class="section downloads">
+    <div class="container">
+      <h2>The full program packet</h2>
+      <p class="lead">Everything on this page in one document, plus the academic expectations and conduct rules signed by participants.</p>
+      <div class="download-row">
+        <a class="card download-card" href="/pdfs/ysjc-2026-program-outline.pdf">
+          <p class="eyebrow">PDF · 4 pages</p>
+          <h3>2026 Program Outline</h3>
+          <p>The full information packet for parents and students.</p>
+          <span class="link-row">Download <span aria-hidden="true">↓</span></span>
+        </a>
+        <a class="card download-card" href="/pdfs/ysjc-2026-academic-expectations.pdf">
+          <p class="eyebrow">PDF · 1 page</p>
+          <h3>Academic Expectations</h3>
+          <p>Class rules and online conduct, distilled into one page.</p>
+          <span class="link-row">Download <span aria-hidden="true">↓</span></span>
+        </a>
+      </div>
+
+      <details class="pdf-embed-wrap">
+        <summary>Preview the Program Outline inline</summary>
+        <object data="/pdfs/ysjc-2026-program-outline.pdf#view=FitH" type="application/pdf" class="pdf-embed">
+          <p>Your browser cannot display the PDF inline. <a href="/pdfs/ysjc-2026-program-outline.pdf">Download it instead</a>.</p>
+        </object>
+      </details>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--ysjc-mint);
+    padding-block: clamp(48px, 8vw, 96px) clamp(32px, 5vw, 64px);
+  }
+
+  .glance {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
+  @media (max-width: 640px) { .glance { grid-template-columns: 1fr; } }
+  .glance > div {
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .glance dt {
+    font-size: var(--fs-tiny);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ysjc-teal-deep);
+    margin-bottom: 4px;
+  }
+  .glance dd { margin: 0; font-weight: 500; color: var(--ink); }
+
+  .section.mint { background: var(--ysjc-mint); }
+
+  .weeks .week-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-top: var(--space-4);
+  }
+  .week-block { border-left: 3px solid var(--ysjc-teal); padding-left: var(--space-3); }
+  .week-block h3 { color: var(--ysjc-blue); font-family: var(--font-display); margin-bottom: var(--space-3); }
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+  @media (max-width: 768px) { .day-grid { grid-template-columns: 1fr; } }
+  .day h4 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--ysjc-blue);
+    font-size: var(--fs-h-m);
+    margin-bottom: var(--space-1);
+  }
+  .day ul { margin: 0; }
+
+  .subhead {
+    font-family: var(--font-sans);
+    font-size: var(--fs-h-m);
+    color: var(--ysjc-blue);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+  .bullets li { margin-bottom: 6px; }
+
+  .conduct-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-3);
+  }
+  @media (max-width: 768px) { .conduct-grid { grid-template-columns: 1fr; } }
+  .conduct-group h3 {
+    font-family: var(--font-sans);
+    font-size: var(--fs-h-m);
+    color: var(--ysjc-blue);
+    margin-bottom: var(--space-2);
+  }
+  .conduct-group ol { padding-inline-start: 1.25rem; }
+  .small { font-size: var(--fs-small); margin-top: var(--space-3); }
+
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-1); margin-top: var(--space-3); }
+  .faq {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: var(--r-chip);
+    padding: var(--space-2) var(--space-3);
+  }
+  .faq summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--ysjc-blue);
+    font-weight: 600;
+    padding-block: var(--space-1);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--ysjc-teal);
+    transition: transform 200ms;
+  }
+  .faq[open] summary::after { transform: rotate(45deg); }
+  .faq p { margin-top: var(--space-1); color: var(--ink); }
+
+  .downloads .download-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+  @media (max-width: 768px) { .downloads .download-row { grid-template-columns: 1fr; } }
+  .download-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 150ms, box-shadow 150ms;
+  }
+  .download-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(27, 94, 139, 0.12);
+  }
+  .download-card h3 { color: var(--ysjc-blue); margin-block: var(--space-1) var(--space-1); }
+  .link-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-2);
+    color: var(--ysjc-blue);
+    font-weight: 600;
+    font-size: var(--fs-small);
+  }
+  .pdf-embed-wrap {
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    padding: var(--space-2) var(--space-3);
+  }
+  .pdf-embed-wrap summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ysjc-blue);
+    padding-block: var(--space-1);
+  }
+  .pdf-embed {
+    width: 100%;
+    height: 80vh;
+    border: 1px solid var(--border);
+    border-radius: var(--r-chip);
+    margin-top: var(--space-2);
+  }
+</style>

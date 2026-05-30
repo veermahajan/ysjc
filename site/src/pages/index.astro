@@ -1,0 +1,572 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import SubjectChip from '../components/SubjectChip.astro';
+import { subjects } from '../data/subjects';
+
+import groupPhoto from '../assets/photos/group-2025.jpg';
+import audienceCs from '../assets/photos/audience-cs.jpg';
+import audienceLight from '../assets/photos/audience-light.jpg';
+import bioCohort from '../assets/photos/biology-cohort.jpg';
+import chemCohort from '../assets/photos/chemistry-cohort.jpg';
+import csCohort from '../assets/photos/cs-cohort.jpg';
+import psychCohort from '../assets/photos/psychology-cohort.jpg';
+import thankYou from '../assets/photos/thank-you.jpg';
+
+const showcasePhotos = [
+  { src: groupPhoto,    alt: 'YSJC 2025 cohort — students, mentors, and parents at Showcase Day, Newark Library.' },
+  { src: audienceCs,    alt: 'Wide view of the Newark Library Community Room — families seated, CS cohort presenting Attention Is All You Need.' },
+  { src: audienceLight, alt: 'Families seated in the Community Room\'s glass atrium, sunlight streaming in.' },
+  { src: bioCohort,     alt: 'Biology cohort presenting their analysis of biological resilience to the audience.' },
+  { src: chemCohort,    alt: 'Chemistry cohort presenting their methodology slide on heavy metals in green tea.' },
+  { src: csCohort,      alt: 'Computer Science cohort presenting Attention Is All You Need with the audience looking on.' },
+  { src: psychCohort,   alt: "Psychology cohort presenting their analysis of Milgram's Obedience Study." },
+  { src: thankYou,      alt: "Presenters at the 'Thank you' slide closing their final presentation." },
+];
+
+const weeks = [
+  {
+    id: 'week-1',
+    label: 'Week 1',
+    title: 'Foundations of Reading Research',
+    days: [
+      { h: 'Day 1 — Introduction to research literature', b: 'Anatomy of a research paper. Types of research. Breakout rooms by subject to meet your mentor.' },
+      { h: 'Day 2 — Your first paper', b: 'Mentors introduce your cohort\'s first paper and walk you into the methods. Guided reading begins.' },
+    ],
+  },
+  {
+    id: 'week-2',
+    label: 'Week 2',
+    title: 'Getting Started with Research',
+    days: [
+      { h: 'Day 1 — Results & interpretation', b: 'Reading figures, tables, and statistical claims. Cohort discussion: what do the results actually show?' },
+      { h: 'Day 2 — Methods deep-dive', b: 'How researchers design a study — controls, variables, sample size. Identify methods in a short companion paper.' },
+    ],
+  },
+  {
+    id: 'week-3',
+    label: 'Week 3',
+    title: 'Critical Thinking in Research',
+    days: [
+      { h: 'Day 1 — Limitations and critique', b: 'Identifying limitations, confounders, and unanswered questions. How peer review and replication work.' },
+      { h: 'Day 2 — Connecting the paper to the field', b: 'Where does this paper fit? Related work, follow-ups, and choosing your final presentation angle.' },
+    ],
+  },
+  {
+    id: 'week-4',
+    label: 'Week 4',
+    title: 'Presentation & Communication',
+    days: [
+      { h: 'Day 1 — Final presentation preparation', b: 'A clinic on science communication. Mentors give live feedback on your draft slides.' },
+      { h: 'Day 2 — Presentation Day', b: 'Department heads introduce each group. Students present their analyses to peers and parents. Closing remarks.' },
+    ],
+  },
+];
+
+const testimonials = [
+  { quote: 'I never thought I would read a real research paper in middle school. By the end I was the one explaining attention heads to my parents.', name: 'Scholar', cohort: 'CS · 2025', subject: subjects.find(s => s.key === 'cs')! },
+  { quote: 'The mentor made the paper feel like a story. We argued about whether the experiment was even ethical, which was the whole point.', name: 'Scholar', cohort: 'Psychology · 2025', subject: subjects.find(s => s.key === 'psychology')! },
+  { quote: 'Going through "Attention Is All You Need" line by line changed how I read everything. I felt like a real scientist.', name: 'Scholar', cohort: 'Biology · 2025', subject: subjects.find(s => s.key === 'biology')! },
+];
+---
+
+<Layout title="" current="" description="A free four-week online summer program where middle and high school students read real research papers with high school mentors — and present their own analysis.">
+
+  <!-- ───────────── HERO ───────────── -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="eyebrow">Summer 2026 · Online · Week of June 15 → Saturday of Week 4</p>
+      <h1 class="hero-title">
+        Read real science.<br />
+        <em>Together.</em>
+      </h1>
+      <p class="lead">
+        A 4-week online summer program where middle and high school students dissect real
+        research papers with high school mentors — and present their own analysis at the end.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary btn-arrow" href="#register">Join the 2026 cohort</a>
+        <a class="btn btn-ghost btn-arrow" href="/journal">See last year's journal</a>
+      </div>
+      <ul class="stat-strip" data-stat-strip>
+        <li><strong data-stat-target="6">0</strong><span>subjects</span></li>
+        <li><strong data-stat-target="30" data-stat-suffix="+">0</strong><span>scholars</span></li>
+        <li><strong data-stat-target="12">0</strong><span>papers analyzed</span></li>
+        <li><strong data-stat-target="4">0</strong><span>weeks</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────────── ANCHOR CARDS ─────────── -->
+  <section class="section anchors">
+    <div class="container">
+      <div class="anchor-grid">
+        <a class="card card-link anchor" href="/program" style="--card-accent: var(--ysjc-blue)">
+          <p class="eyebrow">Starting</p>
+          <h3>Summer 2026</h3>
+          <p>Format, dates, and what to expect from the four-week online cohort.</p>
+          <span class="link-row">Read program details <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card card-link anchor" href="/journal" style="--card-accent: var(--ysjc-teal)">
+          <p class="eyebrow">The Archive</p>
+          <h3>The 2025 Journal</h3>
+          <p>Volume 1 — six literature reviews written by last year's cohort scholars.</p>
+          <span class="link-row">Open the journal <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card card-link anchor" href="/mentors" style="--card-accent: var(--ysjc-blue-deep)">
+          <p class="eyebrow">The Team</p>
+          <h3>Meet the mentors</h3>
+          <p>The high school students who lead each cohort.</p>
+          <span class="link-row">Meet the team <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── HOW IT WORKS (week tabs) ─────────── -->
+  <section class="section weeks">
+    <div class="container">
+      <p class="eyebrow">How it works</p>
+      <h2>Four-week rhythm.</h2>
+      <p class="lead">Two 1-hour Zoom sessions per week. Mentors lead. Students read, discuss, and present.</p>
+
+      <div class="week-tabs" role="tablist" aria-label="Program weeks">
+        {weeks.map((w, i) => (
+          <button
+            role="tab"
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-controls={`panel-${w.id}`}
+            id={`tab-${w.id}`}
+            class:list={['week-tab', i === 0 ? 'is-active' : '']}
+            data-week-tab={w.id}
+          >
+            <span class="tab-label">{w.label}</span>
+            <span class="tab-title">{w.title}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="week-panels">
+        {weeks.map((w, i) => (
+          <div
+            role="tabpanel"
+            id={`panel-${w.id}`}
+            aria-labelledby={`tab-${w.id}`}
+            hidden={i !== 0}
+            class="week-panel"
+            data-week-panel={w.id}
+          >
+            <ol class="week-days">
+              {w.days.map((d) => (
+                <li>
+                  <h4>{d.h}</h4>
+                  <p>{d.b}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+
+      <p class="muted week-foot">Source: <a href="/pdfs/ysjc-2026-program-outline.pdf">YSJC 2026 Program Outline (PDF)</a></p>
+    </div>
+  </section>
+
+  <!-- ─────────── SUBJECTS PREVIEW ─────────── -->
+  <section class="section subjects-preview">
+    <div class="container">
+      <p class="eyebrow">Subjects</p>
+      <h2>Six fields. One way of thinking.</h2>
+      <p class="lead">Each cohort is small, mentor-led, and built around real research papers in its field.</p>
+      <div class="chip-row">
+        {subjects.map((s) => (
+          <SubjectChip subject={s} href={`/subjects#${s.key}`} />
+        ))}
+      </div>
+      <p class="see-all"><a class="btn btn-ghost btn-arrow" href="/subjects">See all subjects</a></p>
+    </div>
+  </section>
+
+  <!-- ─────────── 2025 SHOWCASE STRIP ─────────── -->
+  <section class="section showcase">
+    <div class="container">
+      <p class="eyebrow">Last summer</p>
+      <h2>Photos from Showcase Day.</h2>
+      <p class="lead">Newark Library Community Room — July 26, 2025.</p>
+    </div>
+    <div class="photo-strip" role="region" aria-label="Showcase Day 2025 photos">
+      {showcasePhotos.map((p) => (
+        <figure>
+          <Image src={p.src} alt={p.alt} widths={[600, 900, 1200]} sizes="(max-width: 768px) 80vw, 28vw" loading="lazy" />
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <!-- ─────────── TESTIMONIALS ─────────── -->
+  <section class="section testimonials">
+    <div class="container">
+      <p class="eyebrow">Voices</p>
+      <h2>What scholars are saying.</h2>
+      <p class="muted">Placeholder quotes — replaced with real 2025 scholar quotes before launch.</p>
+      <div class="testimonial-grid">
+        {testimonials.map((t) => (
+          <article class="card testimonial" style={`--card-accent: ${t.subject.color}`}>
+            <p class="quote">&ldquo;{t.quote}&rdquo;</p>
+            <footer>
+              <div class="avatar" style={`background: color-mix(in srgb, ${t.subject.color} 18%, white); color: ${t.subject.color}`}>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2c1.5 3 4.5 4 6 6-1.5 1-3 1-4 2 .5 1.5 0 3-2 4-2-1-2.5-2.5-2-4-1-1-2.5-1-4-2 1.5-2 4.5-3 6-6Z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="name">{t.name}</p>
+                <p class="cohort">{t.cohort}</p>
+              </div>
+            </footer>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── REGISTRATION CTA ─────────── -->
+  <section class="section register-cta" id="register">
+    <div class="container">
+      <div class="register-card">
+        <p class="eyebrow">Sign up for updates</p>
+        <h2>Registration opens soon.</h2>
+        <p class="lead">
+          Drop your email and we'll send the registration form the moment it's live —
+          plus the parent meeting Zoom link for the weekend of June 13–14.
+        </p>
+        <form class="register-form" action="mailto:ysjcteam@gmail.com" method="post" enctype="text/plain">
+          <input type="email" name="email" required placeholder="parent@email.com" aria-label="Email address" />
+          <button type="submit" class="btn btn-primary btn-arrow">Notify me</button>
+        </form>
+        <p class="small muted">We send 2-3 emails a year. No spam.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* HERO */
+  .hero {
+    position: relative;
+    padding-block: clamp(48px, 8vw, 96px) clamp(48px, 8vw, 96px);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60% 60% at 90% 90%, var(--ysjc-mint) 0%, transparent 60%),
+      radial-gradient(40% 40% at 10% 10%, color-mix(in srgb, var(--ysjc-teal) 12%, white) 0%, transparent 70%),
+      var(--paper);
+  }
+  .hero-title {
+    font-size: var(--fs-display-xl);
+    margin-bottom: var(--space-3);
+    line-height: 1.05;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--ysjc-teal-deep);
+    font-weight: 600;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: var(--space-2);
+    margin-block: var(--space-4) var(--space-5);
+    flex-wrap: wrap;
+  }
+  .stat-strip {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-3);
+    max-width: 720px;
+  }
+  .stat-strip li {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+  .stat-strip strong {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    color: var(--ysjc-blue);
+    line-height: 1;
+  }
+  .stat-strip span {
+    font-size: var(--fs-small);
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  @media (max-width: 640px) {
+    .stat-strip { grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  }
+
+  /* ANCHOR CARDS */
+  .anchor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+  @media (max-width: 768px) {
+    .anchor-grid { grid-template-columns: 1fr; }
+  }
+  .anchor h3 {
+    color: var(--ysjc-blue);
+    margin-block: var(--space-1) var(--space-2);
+  }
+  .link-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-2);
+    color: var(--ysjc-blue);
+    font-weight: 600;
+    font-size: var(--fs-small);
+  }
+
+  /* WEEK TABS */
+  .week-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-1);
+    margin-block: var(--space-4) var(--space-3);
+    border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 768px) {
+    .week-tabs { grid-template-columns: repeat(2, 1fr); border-bottom: 0; gap: var(--space-1); }
+  }
+  .week-tab {
+    text-align: left;
+    background: transparent;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    padding: var(--space-2);
+    cursor: pointer;
+    color: var(--ink-soft);
+    transition: color 150ms, border-color 150ms;
+  }
+  .week-tab:hover { color: var(--ink); }
+  .week-tab.is-active {
+    color: var(--ysjc-blue);
+    border-bottom-color: var(--ysjc-teal);
+  }
+  .tab-label {
+    display: block;
+    font-size: var(--fs-tiny);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .tab-title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--fs-h-m);
+    margin-top: 4px;
+  }
+  .week-panel {
+    animation: fadeIn 150ms ease-out;
+  }
+  .week-days {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  @media (max-width: 768px) {
+    .week-days { grid-template-columns: 1fr; }
+  }
+  .week-days h4 {
+    color: var(--ysjc-blue);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: var(--fs-h-m);
+    margin-bottom: var(--space-1);
+  }
+  .week-foot { margin-top: var(--space-4); font-size: var(--fs-small); }
+
+  /* SUBJECTS PREVIEW */
+  .subjects-preview { background: var(--ysjc-mint); }
+  .chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-block: var(--space-3);
+  }
+  .see-all { margin-top: var(--space-3); }
+
+  /* SHOWCASE STRIP */
+  .photo-strip {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: var(--space-3) clamp(20px, 4vw, 40px);
+    margin-top: var(--space-3);
+    scrollbar-width: thin;
+    scrollbar-color: var(--ysjc-teal) var(--ysjc-mint);
+  }
+  .photo-strip figure {
+    flex: 0 0 min(80vw, 360px);
+    margin: 0;
+    scroll-snap-align: start;
+    border-radius: var(--r-card);
+    overflow: hidden;
+    background: var(--ysjc-mint);
+    box-shadow: 0 4px 16px rgba(27, 94, 139, 0.08);
+  }
+  .photo-strip img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials .muted { font-size: var(--fs-small); margin-block: var(--space-1) var(--space-3); }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+  @media (max-width: 768px) {
+    .testimonial-grid { grid-template-columns: 1fr; }
+  }
+  .testimonial .quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.125rem;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: var(--space-3);
+  }
+  .testimonial footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-2);
+  }
+  .testimonial .avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .testimonial .name {
+    font-weight: 600;
+    margin: 0;
+    font-size: var(--fs-small);
+  }
+  .testimonial .cohort {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: var(--fs-tiny);
+  }
+
+  /* REGISTRATION CTA */
+  .register-cta { background: var(--ysjc-mint); }
+  .register-card {
+    background: var(--paper);
+    border: 1px solid var(--ysjc-mint-deep);
+    border-radius: var(--r-card);
+    padding: clamp(28px, 5vw, 56px);
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .register-form {
+    display: flex;
+    gap: var(--space-1);
+    margin-block: var(--space-3) var(--space-2);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .register-form input[type=email] {
+    flex: 1 1 280px;
+    min-width: 240px;
+    padding: 14px 16px;
+    font-size: var(--fs-body);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-chip);
+    font-family: inherit;
+  }
+  .register-form input[type=email]:focus-visible {
+    outline: 2px solid var(--ysjc-blue);
+    outline-offset: 2px;
+    border-color: var(--ysjc-blue);
+  }
+  .small { font-size: var(--fs-small); }
+</style>
+
+<script>
+  // Week tab switching (instant content swap + 150ms fade-in per DESIGN.md §6)
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-week-tab]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-week-panel]');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.weekTab;
+      tabs.forEach(t => {
+        t.classList.toggle('is-active', t === tab);
+        t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+      });
+      panels.forEach(p => {
+        if (p.dataset.weekPanel === target) {
+          p.removeAttribute('hidden');
+        } else {
+          p.setAttribute('hidden', '');
+        }
+      });
+    });
+  });
+
+  // Stat counter — animates 0 → target once on viewport enter
+  const statStrip = document.querySelector('[data-stat-strip]');
+  if (statStrip && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const numbers = statStrip.querySelectorAll<HTMLElement>('[data-stat-target]');
+    const animateOnce = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        numbers.forEach((el) => {
+          const target = parseInt(el.dataset.statTarget ?? '0', 10);
+          const suffix = el.dataset.statSuffix ?? '';
+          const start = performance.now();
+          const duration = 800;
+          const step = (now: number) => {
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = Math.round(target * eased) + (t === 1 ? suffix : '');
+            if (t < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      });
+    };
+    const observer = new IntersectionObserver(animateOnce, { threshold: 0.4 });
+    observer.observe(statStrip);
+  } else if (statStrip) {
+    // Reduced motion: jump straight to target values
+    statStrip.querySelectorAll<HTMLElement>('[data-stat-target]').forEach((el) => {
+      el.textContent = (el.dataset.statTarget ?? '') + (el.dataset.statSuffix ?? '');
+    });
+  }
+</script>

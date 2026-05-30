@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { subjects } from '../data/subjects';
+
+const mentors2025 = subjects
+  .filter((s) => s.mentor2025)
+  .map((s) => ({
+    name: s.mentor2025!,
+    subject: s,
+  }));
+---
+
+<Layout title="Mentors" current="mentors" description="YSJC mentors are high school students with research experience or teaching experience in their subject. Meet last year's cohort leads.">
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">The team</p>
+      <h1>Meet the mentors.</h1>
+      <p class="lead">Mentors are high school students who've either taught the same paper to a cohort before or done research in the field themselves. The 2026 mentor roster is being finalized — below are the mentors who led each cohort in 2025.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <p class="muted note">Full mentor bios and headshots coming soon. Want to mentor a cohort in 2026? Email <a href="mailto:ysjcteam@gmail.com">ysjcteam@gmail.com</a>.</p>
+
+      <div class="mentor-grid">
+        {mentors2025.map((m) => (
+          <article class="mentor-card" style={`--mentor-color: ${m.subject.color}`}>
+            <div class="avatar" aria-hidden="true">
+              <svg viewBox="0 0 64 64" width="48" height="48">
+                <path
+                  d="M32 8c4 8 12 10.5 16 16-4 2.5-8 2.5-10.5 5 1.25 4 0 7.5-5.5 10-5.5-2.5-6.75-6-5.5-10-2.5-2.5-6.5-2.5-10.5-5 4-5.5 12-8 16-16Z"
+                  fill="var(--mentor-color)"
+                  opacity="0.85"
+                />
+              </svg>
+            </div>
+            <div class="mentor-body">
+              <p class="subject-chip" style={`--chip-color: ${m.subject.color}`}>
+                <span class="chip-dot"></span>{m.subject.name}
+              </p>
+              <h3>{m.name}</h3>
+              <p class="bio-placeholder muted">Bio coming soon.</p>
+              {m.subject.papers2025.length > 0 && (
+                <a class="link-row" href={`/journal/${m.subject.key}`}>
+                  See {m.subject.shortName} archive <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+
+        <!-- 2026 placeholder: Physics, plus a generic "more coming" card -->
+        <article class="mentor-card pending" style={`--mentor-color: var(--subj-physics)`}>
+          <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="48" height="48">
+              <circle cx="32" cy="32" r="4" fill="var(--mentor-color)" />
+              <ellipse cx="32" cy="32" rx="22" ry="9" fill="none" stroke="var(--mentor-color)" stroke-width="2" />
+              <ellipse cx="32" cy="32" rx="22" ry="9" fill="none" stroke="var(--mentor-color)" stroke-width="2" transform="rotate(60 32 32)" />
+              <ellipse cx="32" cy="32" rx="22" ry="9" fill="none" stroke="var(--mentor-color)" stroke-width="2" transform="rotate(120 32 32)" />
+            </svg>
+          </div>
+          <div class="mentor-body">
+            <p class="subject-chip" style={`--chip-color: var(--subj-physics)`}>
+              <span class="chip-dot"></span>Physics
+            </p>
+            <h3>To be announced</h3>
+            <p class="bio-placeholder muted">Physics is new for 2026. Mentor and papers will be announced once confirmed.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section mint">
+    <div class="container narrow center">
+      <h2>Become a mentor.</h2>
+      <p class="lead">
+        Mentors are high school students who run their own cohort: pick the papers, run two
+        weekly Zoom sessions, and guide a group of middle and high school students through
+        the capstone presentation. We support you with templates, training, and a community
+        of past mentors. Email
+        <a href="mailto:ysjcteam@gmail.com">ysjcteam@gmail.com</a>
+        if you'd like to apply.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--ysjc-mint);
+    padding-block: clamp(48px, 8vw, 96px) clamp(32px, 5vw, 64px);
+  }
+
+  .note { margin-bottom: var(--space-3); }
+
+  .mentor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+  @media (max-width: 900px) { .mentor-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .mentor-grid { grid-template-columns: 1fr; } }
+
+  .mentor-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    padding: var(--space-3);
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    transition: transform 150ms, box-shadow 150ms;
+  }
+  .mentor-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--mentor-color) 18%, transparent);
+  }
+
+  .avatar {
+    background: color-mix(in srgb, var(--mentor-color) 12%, white);
+    border-radius: 50%;
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  .mentor-body { flex: 1; min-width: 0; }
+  .mentor-body h3 {
+    color: var(--ysjc-blue);
+    margin-block: var(--space-1) 4px;
+    font-size: var(--fs-h-l);
+  }
+  .subject-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: var(--fs-tiny);
+    font-weight: 600;
+    background: color-mix(in srgb, var(--chip-color) 10%, white);
+    color: var(--ink);
+    margin: 0;
+  }
+  .chip-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--chip-color);
+  }
+  .bio-placeholder { font-size: var(--fs-small); margin-block: var(--space-1); }
+  .link-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    color: var(--mentor-color);
+    font-weight: 600;
+    font-size: var(--fs-small);
+    text-decoration: none;
+  }
+  .link-row:hover { text-decoration: underline; }
+
+  .pending h3 { color: var(--ink-soft); }
+
+  .section.mint { background: var(--ysjc-mint); }
+  .narrow { max-width: 720px; }
+  .center { text-align: center; }
+</style>

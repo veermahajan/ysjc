@@ -1,0 +1,188 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { subjects } from '../../data/subjects';
+import { journalV1 } from '../../data/journal-v1';
+import groupPhoto from '../../assets/photos/group-2025.jpg';
+
+const cohorts = subjects
+  .filter((s) => journalV1[s.key] !== null)
+  .map((s) => ({
+    subject: s,
+    entry: journalV1[s.key]!,
+  }));
+---
+
+<Layout title="Journal" current="journal" description="The YSJC Journal — Volume 1, Summer 2025. Six literature reviews written by middle school scholars across Biology, Chemistry, CS, Math, Neuroscience, and Psychology.">
+
+  <header class="journal-hero">
+    <div class="container">
+      <p class="eyebrow">The YSJC Journal · Volume 1</p>
+      <h1>A Collection of <em>Literature Reviews</em></h1>
+      <p class="hero-sub">Summer 2025</p>
+      <p class="lead">We are honored to present the first volume of the YSJC Journal, compiled with the literature reviews written by students in our six subject groups on various scientific papers. Over the course of the Summer 2025 term, the students engaged in guided discussions, learned how to dissect and interpret research, and completed a capstone project, consisting of a literature review paper and a final presentation. This journal showcases their curiosity, critical thinking, and commitment to understanding complex scientific topics, serving as a celebration of their hard work.</p>
+      <p class="downloads-row">
+        <a class="btn btn-primary btn-arrow" href="/pdfs/ysjc-volume-1-summer-2025.pdf">Download the full PDF</a>
+      </p>
+    </div>
+  </header>
+
+  <section class="banner">
+    <Image src={groupPhoto} alt="YSJC 2025 cohort with mentors and parents at Showcase Day, Newark Library." widths={[800, 1200, 1600]} sizes="100vw" />
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>The volume</h2>
+      <p class="lead">Six cohorts. Eight literature reviews. One summer.</p>
+
+      <div class="cohort-grid">
+        {cohorts.map(({ subject, entry }) => (
+          <a
+            href={`/journal/${subject.key}`}
+            class="cohort-card"
+            style={`--card-color: ${subject.color}; --card-tint: color-mix(in srgb, ${subject.color} 10%, white);`}
+          >
+            <p class="subject-name">{subject.name}</p>
+            <p class="card-meta">
+              <span>{entry.reviews.length} {entry.reviews.length === 1 ? 'review' : 'reviews'}</span>
+              <span class="dot">·</span>
+              <span>{subject.scholars2025.length} scholars</span>
+            </p>
+            <h3 class="card-title">
+              {entry.reviews.length === 1
+                ? entry.reviews[0].paperTitle
+                : `${entry.reviews[0].paperTitle} + 1 more`}
+            </h3>
+            <p class="mentor-line">Mentor: <strong>{subject.mentor2025}</strong></p>
+            <span class="open">Read the review <span aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section mint">
+    <div class="container narrow center">
+      <p class="eyebrow">Volume 2 — Summer 2026</p>
+      <h2>Coming after this summer's program.</h2>
+      <p class="lead">Volume 2 will include literature reviews from the 2026 cohort. <a href="/register">Sign up to be notified</a> when it's published.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Read the full Volume 1</h2>
+      <p class="lead">Embedded below — or download the PDF.</p>
+      <object data="/pdfs/ysjc-volume-1-summer-2025.pdf#view=FitH" type="application/pdf" class="pdf-embed">
+        <p>Your browser cannot display the PDF inline. <a href="/pdfs/ysjc-volume-1-summer-2025.pdf">Download it instead</a>.</p>
+      </object>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .journal-hero {
+    background: var(--ysjc-mint);
+    padding-block: clamp(48px, 8vw, 96px) clamp(32px, 5vw, 64px);
+  }
+  .journal-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: var(--space-1);
+  }
+  .journal-hero h1 em {
+    font-style: italic;
+    color: var(--ysjc-teal-deep);
+    font-weight: 600;
+  }
+  .hero-sub {
+    font-family: var(--font-display);
+    font-size: var(--fs-h-l);
+    color: var(--ysjc-teal-deep);
+    font-style: italic;
+    margin-bottom: var(--space-3);
+  }
+  .downloads-row { margin-top: var(--space-3); }
+
+  .banner {
+    overflow: hidden;
+    max-height: 420px;
+  }
+  .banner img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .cohort-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+  @media (max-width: 900px) { .cohort-grid { grid-template-columns: 1fr; } }
+  .cohort-card {
+    background: var(--card-tint);
+    border-left: 4px solid var(--card-color);
+    border-radius: var(--r-card);
+    padding: var(--space-4);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 150ms, box-shadow 200ms;
+    display: block;
+  }
+  .cohort-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--card-color) 20%, transparent);
+  }
+  .subject-name {
+    font-family: var(--font-display);
+    font-size: var(--fs-h-m);
+    color: var(--card-color);
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .card-meta {
+    margin: var(--space-1) 0 var(--space-2);
+    font-size: var(--fs-tiny);
+    color: var(--ink-soft);
+  }
+  .card-meta .dot { margin: 0 6px; }
+  .card-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--fs-h-l);
+    color: var(--ink);
+    margin-bottom: var(--space-2);
+    line-height: 1.25;
+  }
+  .mentor-line {
+    font-size: var(--fs-small);
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .open {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: var(--space-2);
+    color: var(--card-color);
+    font-weight: 600;
+    font-size: var(--fs-small);
+  }
+
+  .section.mint { background: var(--ysjc-mint); }
+  .narrow { max-width: 720px; }
+  .center { text-align: center; }
+
+  .pdf-embed {
+    width: 100%;
+    height: 80vh;
+    border: 1px solid var(--border);
+    border-radius: var(--r-card);
+    margin-top: var(--space-2);
+  }
+</style>

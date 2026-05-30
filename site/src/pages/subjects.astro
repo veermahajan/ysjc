@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { subjects } from '../data/subjects';
+---
+
+<Layout title="Subjects" current="subjects" description="The STEM subject cohorts offered by YSJC for Summer 2026. Each cohort is mentor-led and built around real research papers.">
+
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Summer 2026</p>
+      <h1>Subjects.</h1>
+      <p class="lead">Subjects are finalized as we confirm mentors. The final lineup will be announced before registration closes. Students may indicate up to two subject preferences on the registration form, and a mid-program rotation opportunity is offered for students who want exposure to a second field.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="subject-grid">
+        {subjects.map((s) => (
+          <article
+            id={s.key}
+            class="subject-card"
+            style={`--card-color: ${s.color}; --card-tint: color-mix(in srgb, ${s.color} 6%, white);`}
+          >
+            <span class="status">
+              {s.status2026 === 'confirmed' ? '✓ Confirmed for 2026' : 'Under consideration'}
+            </span>
+            <h2 class="subject-name">{s.name}</h2>
+            <p class="description">{s.description}</p>
+
+            {s.mentor2025 && (
+              <div class="meta">
+                <p class="meta-label">2025 mentor</p>
+                <p>{s.mentor2025}</p>
+              </div>
+            )}
+
+            {s.papers2025.length > 0 && (
+              <div class="meta">
+                <p class="meta-label">Past papers analyzed</p>
+                <ul class="paper-list">
+                  {s.papers2025.map((p) => <li><em>{p}</em></li>)}
+                </ul>
+              </div>
+            )}
+
+            {s.mentor2025 && (
+              <a class="archive-link" href={`/journal/${s.key}`}>
+                See the 2025 archive <span aria-hidden="true">→</span>
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section mint">
+    <div class="container narrow">
+      <h2>Don't see your favorite subject?</h2>
+      <p class="lead">YSJC's subject list grows when new mentors join. If you're a high school student with research or teaching experience in a STEM field we don't offer yet, we'd love to hear from you — email <a href="mailto:ysjcteam@gmail.com">ysjcteam@gmail.com</a>.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--ysjc-mint);
+    padding-block: clamp(48px, 8vw, 96px) clamp(32px, 5vw, 64px);
+  }
+
+  .subject-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+  @media (max-width: 900px) { .subject-grid { grid-template-columns: 1fr; } }
+
+  .subject-card {
+    background: var(--card-tint);
+    border-left: 4px solid var(--card-color);
+    border-radius: var(--r-card);
+    padding: var(--space-4);
+    scroll-margin-top: 100px;
+    transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+  }
+  .subject-card:target {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--card-color) 40%, transparent);
+  }
+
+  .status {
+    display: inline-block;
+    font-size: var(--fs-tiny);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: var(--space-1);
+  }
+  .subject-name {
+    color: var(--card-color);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin-bottom: var(--space-2);
+  }
+  .description {
+    color: var(--ink);
+    margin-bottom: var(--space-3);
+  }
+  .meta { margin-bottom: var(--space-2); }
+  .meta-label {
+    font-size: var(--fs-tiny);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .meta p { margin: 0; }
+  .paper-list { margin: 0; padding-inline-start: 1.25rem; }
+  .paper-list li { margin-bottom: 4px; font-size: var(--fs-small); color: var(--ink); }
+
+  .archive-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: var(--space-2);
+    color: var(--card-color);
+    font-weight: 600;
+    font-size: var(--fs-small);
+    text-decoration: none;
+  }
+  .archive-link:hover { text-decoration: underline; }
+
+  .section.mint { background: var(--ysjc-mint); }
+  .narrow { max-width: 720px; }
+</style>

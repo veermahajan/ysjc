@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import mark from '../assets/logo/mark.png';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-about">
+        <Image src={mark} alt="" width={48} height={48} class="footer-mark" />
+        <p class="mission">A free four-week online summer program where middle and high school students read real research with high school mentors — and present their own analysis.</p>
+        <p>
+          <a href="mailto:ysjcteam@gmail.com">ysjcteam@gmail.com</a>
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Site</h5>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/program">Program</a></li>
+          <li><a href="/subjects">Subjects</a></li>
+          <li><a href="/mentors">Mentors</a></li>
+          <li><a href="/journal">Journal</a></li>
+          <li><a href="/register">Register</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Summer 2025</h5>
+        <ul>
+          <li><a href="/journal">Journal Vol. 1</a></li>
+          <li><a href="/pdfs/ysjc-volume-1-summer-2025.pdf">Download Vol. 1 (PDF)</a></li>
+          <li><a href="/pdfs/ysjc-2026-program-outline.pdf">2026 Program Outline (PDF)</a></li>
+          <li><a href="/pdfs/ysjc-2026-academic-expectations.pdf">2026 Academic Expectations (PDF)</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <small>&copy; 2026 Youth STEM Journal Club &middot; ysjcteam@gmail.com</small>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ysjc-mint);
+    padding-block: var(--space-6) var(--space-4);
+    margin-top: var(--space-7);
+    border-top: 1px solid var(--ysjc-mint-deep);
+  }
+  .footer-grid {
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+  .footer-mark { margin-bottom: var(--space-2); }
+  .mission {
+    max-width: 42ch;
+    color: var(--ink);
+    font-size: var(--fs-small);
+  }
+  .footer-col h5 {
+    color: var(--ysjc-blue);
+    font-family: var(--font-sans);
+    font-size: var(--fs-tiny);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-col li { margin-bottom: 6px; }
+  .footer-col a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: var(--fs-small);
+  }
+  .footer-col a:hover {
+    color: var(--ysjc-blue);
+    text-decoration: underline;
+  }
+  .footer-bottom {
+    margin-top: var(--space-5);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--ysjc-mint-deep);
+    color: var(--ink-soft);
+  }
+</style>

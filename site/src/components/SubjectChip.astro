@@ -1,0 +1,10 @@
+---
+import type { Subject } from '../data/subjects';
+const { subject, href } = Astro.props as { subject: Subject; href?: string };
+const Tag = href ? 'a' : 'span';
+---
+
+<Tag class="chip" href={href} style={`--chip-color: ${subject.color}`}>
+  <span class="chip-dot"></span>
+  {subject.name}
+</Tag>

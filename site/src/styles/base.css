@@ -1,0 +1,198 @@
+/* Base reset + element defaults */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--ink);
+  background: var(--paper);
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--ysjc-blue);
+  line-height: var(--lh-tight);
+  margin: 0 0 var(--space-2);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--fs-display-l); }
+h2 { font-size: var(--fs-display-m); }
+h3 { font-size: var(--fs-h-l); }
+h4 { font-size: var(--fs-h-m); }
+h5 { font-size: var(--fs-h-s); }
+
+p { margin: 0 0 var(--space-2); }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--ysjc-blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 150ms ease-out;
+}
+a:hover { color: var(--ysjc-teal-deep); }
+a:focus-visible {
+  outline: 2px solid var(--ysjc-blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+img, picture, video {
+  max-width: 100%;
+  display: block;
+}
+
+ul, ol { padding-inline-start: var(--space-3); }
+li { margin-bottom: var(--space-1); }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--space-4) 0;
+}
+
+/* Layout primitives */
+
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 4vw, 40px);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ysjc-teal-deep);
+  margin-bottom: var(--space-2);
+}
+
+.lead {
+  font-size: 1.125rem;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+.muted { color: var(--ink-soft); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 14px 24px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--r-chip);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out, background 150ms ease-out;
+  line-height: 1;
+}
+.btn-primary {
+  background: var(--ysjc-blue);
+  color: var(--paper);
+}
+.btn-primary:hover {
+  background: var(--ysjc-blue-deep);
+  color: var(--paper);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(27, 94, 139, 0.25);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ysjc-blue);
+  border-color: transparent;
+}
+.btn-ghost:hover {
+  color: var(--ysjc-blue-deep);
+  text-decoration: underline;
+}
+.btn-arrow::after {
+  content: '→';
+  display: inline-block;
+  transition: transform 150ms ease-out;
+}
+.btn-arrow:hover::after {
+  transform: translateX(3px);
+}
+
+/* Scroll-triggered fade-up (CSS-only via animation-timeline where supported) */
+.fade-in {
+  animation: fadeIn 600ms ease-out both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Subject chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--chip-color, var(--ysjc-teal)) 8%, white);
+  border: 1.5px solid color-mix(in srgb, var(--chip-color, var(--ysjc-teal)) 60%, white);
+  color: var(--ink);
+  transition: all 150ms ease-out;
+  text-decoration: none;
+}
+.chip:hover {
+  background: color-mix(in srgb, var(--chip-color, var(--ysjc-teal)) 16%, white);
+  border-color: color-mix(in srgb, var(--chip-color, var(--ysjc-teal)) 80%, white);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+.chip-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--chip-color, var(--ysjc-teal));
+  flex-shrink: 0;
+}
+
+/* Card surface */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  padding: var(--space-4);
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+}
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.card-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--card-accent, var(--ysjc-blue)) 18%, transparent);
+}
